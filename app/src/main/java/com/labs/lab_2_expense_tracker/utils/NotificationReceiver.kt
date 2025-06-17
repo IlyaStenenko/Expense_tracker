@@ -8,7 +8,6 @@ import android.os.Build
 import androidx.core.app.NotificationCompat
 import androidx.core.app.NotificationManagerCompat
 import androidx.core.content.ContextCompat
-import com.labs.lab_2_expense_tracker.R
 import com.labs.lab_2_expense_tracker.data.TransactionStorage
 import java.util.Calendar
 
@@ -33,7 +32,6 @@ class NotificationReceiver : BroadcastReceiver() {
                 .setContentText("Вы израсходовали ${spent} из $limit")
                 .setPriority(NotificationCompat.PRIORITY_HIGH)
 
-            // Проверка разрешения на Android 13+
             if (Build.VERSION.SDK_INT < Build.VERSION_CODES.TIRAMISU ||
                 ContextCompat.checkSelfPermission(
                     context,

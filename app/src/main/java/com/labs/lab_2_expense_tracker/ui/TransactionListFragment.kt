@@ -54,7 +54,7 @@ class TransactionListFragment : Fragment() {
 
         recyclerView = view.findViewById(R.id.recyclerView)
         val fab = view.findViewById<FloatingActionButton>(R.id.fab)
-        val limitButton = view.findViewById<FloatingActionButton>(R.id.limitButton) // <- добавлено
+        val limitButton = view.findViewById<FloatingActionButton>(R.id.limitButton)
         filterSpinner = view.findViewById(R.id.categoryFilterSpinner)
 
         storage = TransactionStorage(requireContext())
@@ -68,7 +68,7 @@ class TransactionListFragment : Fragment() {
             addEditLauncher.launch(intent)
         }
 
-        limitButton.setOnClickListener {  // <- добавлено
+        limitButton.setOnClickListener {
             val intent = Intent(requireContext(), LimitSettingsActivity::class.java)
             startActivity(intent)
         }

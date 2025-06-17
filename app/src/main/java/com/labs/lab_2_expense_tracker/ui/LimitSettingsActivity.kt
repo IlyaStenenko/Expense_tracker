@@ -12,12 +12,11 @@ import com.labs.lab_2_expense_tracker.notifications.NotificationScheduler
 class LimitSettingsActivity : ComponentActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        setContentView(R.layout.activity_set_limit) // <-- правильный layout
+        setContentView(R.layout.activity_set_limit)
 
         val limitInput = findViewById<EditText>(R.id.limitInput)
         val saveButton = findViewById<Button>(R.id.saveLimitButton)
 
-        // Показать текущий лимит (если есть)
         val currentLimit = LimitStorage.getLimit(this)
         if (currentLimit > 0) {
             limitInput.setText(currentLimit.toString())

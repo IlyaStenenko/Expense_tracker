@@ -43,7 +43,6 @@ class AddTransactionActivity : ComponentActivity() {
 
                 Snackbar.make(it, "Добавлено!", Snackbar.LENGTH_SHORT).show()
 
-                // Вернем результат об успешном сохранении
                 setResult(RESULT_OK)
                 finish()
             } else {

@@ -17,19 +17,16 @@ class NotificationReceiver : BroadcastReceiver() {
 
     override fun onReceive(context: Context, intent: Intent) {
         val storage = TransactionStorage(context)
-
-        // Получаем текущий месяц и год
         val calendar = Calendar.getInstance()
         val currentMonth = calendar.get(Calendar.MONTH)
         val currentYear = calendar.get(Calendar.YEAR)
 
-        // Загружаем все транзакции
+
         val transactions = storage.load()
 
-        // Фильтруем транзакции текущего месяца
         val monthlySum = transactions.filter {
             val transCalendar = Calendar.getInstance()
-            transCalendar.timeInMillis = it.timestamp  // предполагается, что Transaction хранит timestamp в millis
+            transCalendar.timeInMillis = it.timestamp
             transCalendar.get(Calendar.MONTH) == currentMonth &&
                     transCalendar.get(Calendar.YEAR) == currentYear
         }.sumOf { it.amount }
@@ -46,7 +43,6 @@ class NotificationReceiver : BroadcastReceiver() {
         val channelId = "expense_limit_channel"
         val notificationManager = context.getSystemService(Context.NOTIFICATION_SERVICE) as NotificationManager
 
-        // Создаем канал уведомлений (для Android 8.0+)
         if (Build.VERSION.SDK_INT >= Build.VERSION_CODES.O) {
             val channel = NotificationChannel(
                 channelId,
@@ -60,7 +56,7 @@ class NotificationReceiver : BroadcastReceiver() {
         val pendingIntent = PendingIntent.getActivity(context, 0, intent, PendingIntent.FLAG_UPDATE_CURRENT or PendingIntent.FLAG_IMMUTABLE)
 
         val notification = NotificationCompat.Builder(context, channelId)
-            .setSmallIcon(R.drawable.ic_notification)  // добавь иконку в res/drawable
+            .setSmallIcon(R.drawable.ic_notification)
             .setContentTitle("Внимание! Расходы близки к лимиту")
             .setContentText("Вы потратили %.2f из %.2f ₽".format(spent, limit))
             .setContentIntent(pendingIntent)

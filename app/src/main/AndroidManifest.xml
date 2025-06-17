@@ -2,7 +2,6 @@
 <manifest xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:tools="http://schemas.android.com/tools">
 
-    <!-- Разрешения -->
     <uses-permission android:name="android.permission.POST_NOTIFICATIONS" />
     <uses-permission android:name="android.permission.RECEIVE_BOOT_COMPLETED" />
 
@@ -17,7 +16,6 @@
         android:theme="@style/Theme.Lab_2_Expense_tracker"
         tools:targetApi="31">
 
-        <!-- Главная активность -->
         <activity
             android:name=".MainActivity"
             android:exported="true"
@@ -29,7 +27,6 @@
             </intent-filter>
         </activity>
 
-        <!-- Добавление транзакции -->
         <activity
             android:name=".ui.AddTransactionActivity"
             android:exported="true">
@@ -39,17 +36,14 @@
             </intent-filter>
         </activity>
 
-        <!-- Настройка лимита расходов -->
         <activity
             android:name=".ui.LimitSettingsActivity"
             android:exported="true" />
 
-        <!-- Получатель уведомлений -->
         <receiver
             android:name=".notifications.NotificationReceiver"
             android:exported="false" />
 
-        <!-- Получатель после перезапуска устройства -->
         <receiver
             android:name=".notifications.BootCompletedReceiver"
             android:enabled="true"
